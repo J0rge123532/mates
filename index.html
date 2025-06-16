@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Entrena tu Mente!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #81abf8;
+            margin: 0;
+        }
+
+        .container {
+            width: 700px; /* Ajusta según sea necesario para tu "cuadrado" */
+            height: 700px; /* Debe ser igual al ancho para un cuadrado perfecto */
+            background-color: #1579bb;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            box-sizing: border-box; /* Incluye el padding en el ancho/alto */
+            text-align: center;
+            position: relative; /* Necesario para el posicionamiento absoluto del botón */
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .slogan {
+            color: #ffffff;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #ffffff;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas de igual ancho */
+            grid-template-rows: repeat(2, 1fr);    /* 2 filas de igual alto */
+            gap: 20px; /* Espacio entre los elementos de la cuadrícula */
+            flex-grow: 1; /* Permite que la cuadrícula ocupe el espacio disponible */
+        }
+
+        .section-item {
+            background-color: #e9e9e9;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            padding: 20px; /* Añadido para mejor espaciado interno */
+            text-align: center; /* Asegura que el texto esté centrado */
+        }
+
+        .section-item:hover {
+            background-color: #dcdcdc;
+            transform: translateY(-5px);
+        }
+
+        .section-item i {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #007bff; /* Color para los íconos */
+        }
+
+        .difficulty-selector {
+            margin-top: 20px; /* Espacio superior */
+            font-size: 1.1em;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px; /* Espacio entre el label y el select */
+        }
+
+        .difficulty-selector select {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #059bff;
+            font-size: 1em;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Entrena tu Mente!</h1>
+        <p class="slogan">Desafía tus habilidades matemáticas y diviértete.</p>
+
+        <div class="difficulty-selector">
+            <label for="difficulty">Dificultad:</label>
+            <select id="difficulty">
+                <option value="easy">Fácil</option>
+                <option value="medium">Medio</option>
+                <option value="hard">Difícil</option>
+            </select>
+        </div>
+
+        <div class="info-bar">
+            <div id="timer">Tiempo: 00:00</div>
+            <div id="score">Puntuación: 0</div>
+        </div>
+
+        <div class="sections-grid">
+            <a href="multiplicacion.html" class="section-item">
+                <i class="fas fa-times"></i> Multiplicación
+            </a>
+            <a href="suma.html" class="section-item">
+                <i class="fas fa-plus"></i> Suma
+            </a>
+            <a href="resta.html" class="section-item">
+                <i class="fas fa-minus"></i> Resta
+            </a>
+            <a href="#" class="section-item" id="coming-soon">
+                <i class="fas fa-gamepad"></i> Más Juegos (Próximamente, osea nunca )
+            </a>
+        </div>
+    </div>
+
+    <script>
+       
+        const timerDisplay = document.getElementById('timer');
+        const scoreDisplay = document.getElementById('score');
+        const difficultySelect = document.getElementById('difficulty');
+        const comingSoonLink = document.getElementById('coming-soon');
+
+        let score = 0;
+        let time = 0;
+        let timerInterval;
+function startTimer() {
+           console.log('Timer iniciado desde index.html (solo si se implementa un juego aquí)');
+        }
+
+        function updateScore(points) {
+             console.log(`Puntuación actualizada: ${points}`);
+       }
+
+        comingSoonLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Esta sección estará disponible pronto. ¡Vuelve para más desafíos!');
+        });
+
+        difficultySelect.addEventListener('change', (e) => {
+            alert(`Dificultad seleccionada: ${e.target.value}`);
+         localStorage.setItem('gameDifficulty', e.target.value);
+        });
+
+        window.onload = () => {
+           
+            console.log('Página principal cargada. La dificultad actual es: ' + (localStorage.getItem('gameDifficulty') || 'no seleccionada'));
+        };
+
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resta - ¡Entrena tu Mente!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #45287a; /* Fondo de color púrpura oscuro */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .game-container {
+            background-color: #6f5bb4; /* Fondo de color púrpura más claro */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #150050; /* Color de texto azul oscuro para el título */
+            margin-bottom: 20px;
+        }
+
+        .problem {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #4ba2ff; /* Color de texto azul claro para el problema */
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            font-size: 1.5em;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            width: 150px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #12a9bd; /* Color de botón azul verdoso */
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #0e8a99; /* Tono más oscuro al pasar el ratón */
+        }
+
+        .feedback {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            min-height: 1.5em; /* Asegura que el espacio no cambie */
+        }
+
+        .feedback.correct {
+            color: #28a745; /* Verde para correcto */
+        }
+
+        .feedback.incorrect {
+            color: #dc3545; /* Rojo para incorrecto */
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #000000; /* Color de texto negro */
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #000000; /* Color de texto negro */
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1><i class="fas fa-minus"></i> Resta</h1>
+
+        <div class="game-info">
+            <div id="gameTimer">Tiempo: 00:00</div>
+            <div id="gameScore">Puntuación: 0</div>
+            <div id="gameDifficulty">Dificultad: Fácil</div>
+        </div>
+
+        <p class="problem" id="mathProblem">Cargando...</p>
+        <input type="number" id="userAnswer" placeholder="Tu respuesta">
+        <button id="checkButton">Verificar</button>
+        <p class="feedback" id="feedbackMessage"></p>
+        <a href="operaciones.html" class="back-link">Regresar al inicio</a>
+    </div>
+
+    <script>
+        const mathProblem = document.getElementById('mathProblem');
+        const userAnswer = document.getElementById('userAnswer');
+        const checkButton = document.getElementById('checkButton');
+        const feedbackMessage = document.getElementById('feedbackMessage');
+        const gameTimerDisplay = document.getElementById('gameTimer');
+        const gameScoreDisplay = document.getElementById('gameScore');
+        const gameDifficultyDisplay = document.getElementById('gameDifficulty');
+        
+        let num1, num2, correctAnswer;
+        let score = 0;
+        let time = 0;
+        let timerInterval;
+
+        // Recuperar la dificultad del localStorage
+        const difficulty = localStorage.getItem('gameDifficulty') || 'easy'; 
+
+        function generateProblem() {
+            let maxNum;
+            if (difficulty === 'easy') {
+                maxNum = 20;
+            } else if (difficulty === 'medium') {
+                maxNum = 50;
+            } else { // hard
+                maxNum = 100;
+            }
+
+            num1 = Math.floor(Math.random() * maxNum) + 1;
+            num2 = Math.floor(Math.random() * num1) + 1; // Asegura que num1 sea mayor o igual a num2
+            correctAnswer = num1 - num2;
+
+            mathProblem.textContent = `¿Cuánto es ${num1} - ${num2}?`;
+            userAnswer.value = ''; // Limpiar la respuesta anterior
+            feedbackMessage.textContent = ''; // Limpiar el mensaje de feedback
+            feedbackMessage.className = 'feedback'; // Resetear clases de feedback
+            userAnswer.focus(); // Enfocar el campo de respuesta
+        }
+
+        function updateScore(points) {
+            score += points;
+            gameScoreDisplay.textContent = `Puntuación: ${score}`;
+            localStorage.setItem('gameScore', score); // Guardar puntuación
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval); // Limpiar el timer anterior si existe
+            time = 0; // Resetear el tiempo
+            gameTimerDisplay.textContent = `Tiempo: 00:00`;
+            timerInterval = setInterval(() => {
+                time++;
+                const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+                const seconds = (time % 60).toString().padStart(2, '0');
+                gameTimerDisplay.textContent = `Tiempo: ${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function checkAnswer() {
+            const userResponse = parseInt(userAnswer.value);
+
+            if (isNaN(userResponse)) {
+                feedbackMessage.textContent = 'Por favor, introduce un número.';
+                feedbackMessage.className = 'feedback incorrect';
+                return;
+            }
+
+            if (userResponse === correctAnswer) {
+                feedbackMessage.textContent = '¡Correcto!';
+                feedbackMessage.className = 'feedback correct';
+                updateScore(10);
+            } else {
+                feedbackMessage.textContent = `Incorrecto. La respuesta correcta era ${correctAnswer}.`;
+                feedbackMessage.className = 'feedback incorrect';
+                updateScore(-5);
+            }
+            setTimeout(generateProblem, 1500);
+        }
+
+        checkButton.addEventListener('click', checkAnswer);
+        userAnswer.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        window.onload = () => {
+            gameDifficultyDisplay.textContent = `Dificultad: ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`;
+            score = parseInt(localStorage.getItem('gameScore')) || 0;
+            gameScoreDisplay.textContent = `Puntuación: ${score}`;
+            generateProblem();
+            startTimer();
+        };
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suma - ¡Entrena tu Mente!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #348a1e; /* Fondo de color verde oscuro */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .game-container {
+            background-color: #4eca82; /* Fondo de color verde claro */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #333; /* Color de texto oscuro para el título */
+            margin-bottom: 20px;
+        }
+
+        .problem {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #000000; /* Color de texto negro para el problema */
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            font-size: 1.5em;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            width: 150px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #ff0000; /* Color de botón rojo */
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #cc0000; /* Tono más oscuro al pasar el ratón */
+        }
+
+        .feedback {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            min-height: 1.5em; /* Asegura que el espacio no cambie */
+        }
+
+        .feedback.correct {
+            color: #28a745; /* Verde para correcto */
+        }
+
+        .feedback.incorrect {
+            color: #dc3545; /* Rojo para incorrecto */
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #000000; /* Color de texto negro */
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #007bff; /* Color de enlace azul */
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1><i class="fas fa-plus"></i> Suma</h1>
+
+        <div class="game-info">
+            <div id="gameTimer">Tiempo: 00:00</div>
+            <div id="gameScore">Puntuación: 0</div>
+            <div id="gameDifficulty">Dificultad: Fácil</div>
+        </div>
+
+        <p class="problem" id="mathProblem">Cargando...</p>
+        <input type="number" id="userAnswer" placeholder="Tu respuesta">
+        <button id="checkButton">Verificar</button>
+        <p class="feedback" id="feedbackMessage"></p>
+        <a href="operaciones.html" class="back-link">Regresar al inicio</a>
+    </div>
+
+    <script>
+        const mathProblem = document.getElementById('mathProblem');
+        const userAnswer = document.getElementById('userAnswer');
+        const checkButton = document.getElementById('checkButton');
+        const feedbackMessage = document.getElementById('feedbackMessage');
+        const gameTimerDisplay = document.getElementById('gameTimer');
+        const gameScoreDisplay = document.getElementById('gameScore');
+        const gameDifficultyDisplay = document.getElementById('gameDifficulty');
+        
+        let num1, num2, correctAnswer;
+        let score = 0;
+        let time = 0;
+        let timerInterval;
+
+        // Recuperar la dificultad del localStorage
+        const difficulty = localStorage.getItem('gameDifficulty') || 'easy'; 
+
+        function generateProblem() {
+            let maxNum;
+            if (difficulty === 'easy') {
+                maxNum = 20;
+            } else if (difficulty === 'medium') {
+                maxNum = 50;
+            } else { // hard
+                maxNum = 100;
+            }
+
+            num1 = Math.floor(Math.random() * maxNum) + 1;
+            num2 = Math.floor(Math.random() * maxNum) + 1;
+            correctAnswer = num1 + num2;
+
+            mathProblem.textContent = `¿Cuánto es ${num1} + ${num2}?`;
+            userAnswer.value = ''; // Limpiar la respuesta anterior
+            feedbackMessage.textContent = ''; // Limpiar el mensaje de feedback
+            feedbackMessage.className = 'feedback'; // Resetear clases de feedback
+            userAnswer.focus(); // Enfocar el campo de respuesta
+        }
+
+        function updateScore(points) {
+            score += points;
+            gameScoreDisplay.textContent = `Puntuación: ${score}`;
+            localStorage.setItem('gameScore', score); // Guardar puntuación
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval); // Limpiar el timer anterior si existe
+            time = 0; // Resetear el tiempo
+            gameTimerDisplay.textContent = `Tiempo: 00:00`;
+            timerInterval = setInterval(() => {
+                time++;
+                const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+                const seconds = (time % 60).toString().padStart(2, '0');
+                gameTimerDisplay.textContent = `Tiempo: ${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function checkAnswer() {
+            const userResponse = parseInt(userAnswer.value);
+
+            if (isNaN(userResponse)) {
+                feedbackMessage.textContent = 'Por favor, introduce un número.';
+                feedbackMessage.className = 'feedback incorrect';
+                return;
+            }
+
+            if (userResponse === correctAnswer) {
+                feedbackMessage.textContent = '¡Correcto!';
+                feedbackMessage.className = 'feedback correct';
+                updateScore(10);
+            } else {
+                feedbackMessage.textContent = `Incorrecto. La respuesta correcta era ${correctAnswer}.`;
+                feedbackMessage.className = 'feedback incorrect';
+                updateScore(-5);
+            }
+            setTimeout(generateProblem, 1500);
+        }
+
+        checkButton.addEventListener('click', checkAnswer);
+        userAnswer.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        window.onload = () => {
+            gameDifficultyDisplay.textContent = `Dificultad: ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`;
+            score = parseInt(localStorage.getItem('gameScore')) || 0;
+            gameScoreDisplay.textContent = `Puntuación: ${score}`;
+            generateProblem();
+            startTimer();
+        };
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplicación - ¡Entrena tu Mente!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #206e9b; /* Color de fondo azul oscuro */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .game-container {
+            background-color: #2577d4; /* Color de fondo azul más claro */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #ffffff; /* Color de texto blanco para el título */
+            margin-bottom: 20px;
+        }
+
+        .problem {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #000000; /* Color de texto negro para el problema */
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            font-size: 1.5em;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            width: 150px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #910505; /* Color de botón rojo oscuro */
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #7a0404; /* Tono más oscuro al pasar el ratón */
+        }
+
+        .feedback {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            min-height: 1.5em; /* Asegura que el espacio no cambie */
+        }
+
+        .feedback.correct {
+            color: #28a745; /* Verde para correcto */
+        }
+
+        .feedback.incorrect {
+            color: #dc3545; /* Rojo para incorrecto */
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #000000; /* Color de texto negro */
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #000000; /* Color de texto negro */
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1><i class="fas fa-times"></i> Multiplicación</h1>
+
+        <div class="game-info">
+            <div id="gameTimer">Tiempo: 00:00</div>
+            <div id="gameScore">Puntuación: 0</div>
+            <div id="gameDifficulty">Dificultad: Fácil</div>
+        </div>
+
+        <p class="problem" id="mathProblem">Cargando...</p>
+        <input type="number" id="userAnswer" placeholder="Tu respuesta">
+        <button id="checkButton">Verificar</button>
+        <p class="feedback" id="feedbackMessage"></p>
+        <a href="operaciones.html" class="back-link">Regresar al inicio</a>
+    </div>
+
+    <script>
+        const mathProblem = document.getElementById('mathProblem');
+        const userAnswer = document.getElementById('userAnswer');
+        const checkButton = document.getElementById('checkButton');
+        const feedbackMessage = document.getElementById('feedbackMessage');
+        const gameTimerDisplay = document.getElementById('gameTimer');
+        const gameScoreDisplay = document.getElementById('gameScore');
+        const gameDifficultyDisplay = document.getElementById('gameDifficulty');
+        
+        let num1, num2, correctAnswer;
+        let score = 0;
+        let time = 0;
+        let timerInterval;
+
+        // Recuperar la dificultad del localStorage
+        const difficulty = localStorage.getItem('gameDifficulty') || 'easy'; 
+
+        function generateProblem() {
+            let maxNum;
+            if (difficulty === 'easy') {
+                maxNum = 10;
+            } else if (difficulty === 'medium') {
+                maxNum = 20;
+            } else { // hard
+                maxNum = 30;
+            }
+
+            num1 = Math.floor(Math.random() * maxNum) + 1;
+            num2 = Math.floor(Math.random() * maxNum) + 1;
+            correctAnswer = num1 * num2;
+
+            mathProblem.textContent = `¿Cuánto es ${num1} x ${num2}?`;
+            userAnswer.value = ''; // Limpiar la respuesta anterior
+            feedbackMessage.textContent = ''; // Limpiar el mensaje de feedback
+            feedbackMessage.className = 'feedback'; // Resetear clases de feedback
+            userAnswer.focus(); // Enfocar el campo de respuesta
+        }
+
+        function updateScore(points) {
+            score += points;
+            gameScoreDisplay.textContent = `Puntuación: ${score}`;
+            localStorage.setItem('gameScore', score); // Guardar puntuación
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval); // Limpiar el timer anterior si existe
+            time = 0; // Resetear el tiempo
+            gameTimerDisplay.textContent = `Tiempo: 00:00`;
+            timerInterval = setInterval(() => {
+                time++;
+                const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+                const seconds = (time % 60).toString().padStart(2, '0');
+                gameTimerDisplay.textContent = `Tiempo: ${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function checkAnswer() {
+            const userResponse = parseInt(userAnswer.value);
+            if (isNaN(userResponse)) {
+                feedbackMessage.textContent = 'Por favor, introduce un número.';
+                feedbackMessage.className = 'feedback incorrect';
+                return;
+            }
+
+            if (userResponse === correctAnswer) {
+                feedbackMessage.textContent = '¡Correcto!';
+                feedbackMessage.className = 'feedback correct';
+                updateScore(10); // Sumar 10 puntos por respuesta correcta
+            } else {
+                feedbackMessage.textContent = `Incorrecto. La respuesta correcta era ${correctAnswer}.`;
+                feedbackMessage.className = 'feedback incorrect';
+                updateScore(-5); // Restar 5 puntos por respuesta incorrecta
+            }
+            setTimeout(generateProblem, 1500); // Genera un nuevo problema después de 1.5 segundos
+        }
+
+        checkButton.addEventListener('click', checkAnswer);
+        userAnswer.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Inicializar el juego al cargar la página
+        window.onload = () => {
+            gameDifficultyDisplay.textContent = `Dificultad: ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`;
+            score = parseInt(localStorage.getItem('gameScore')) || 0; // Cargar puntuación guardada
+            gameScoreDisplay.textContent = `Puntuación: ${score}`;
+            generateProblem();
+            startTimer();
+        };
+    </script>
+</body>
+</html>
